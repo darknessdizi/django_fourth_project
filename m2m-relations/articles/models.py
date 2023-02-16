@@ -17,8 +17,7 @@ class Article(models.Model):
 
 class Tags(models.Model):
     name = models.CharField(max_length=30)
-    arcticles = models.ManyToManyField(Article, through='TagsArticle', related_name='scopes')
-
+    
     class Meta:
         verbose_name = 'Тег'
         verbose_name_plural = 'Теги'
@@ -29,7 +28,7 @@ class Tags(models.Model):
 
 class TagsArticle(models.Model):
     tag = models.ForeignKey(Tags, on_delete=models.CASCADE)
-    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='scopes')
     is_main = models.BooleanField(default=False)
 
     class Meta:
