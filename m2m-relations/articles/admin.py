@@ -1,22 +1,21 @@
 from django.contrib import admin
-
 from .models import Article, Tags, TagsArticle
+
+
+class RelationshipInline(admin.TabularInline):
+    model = TagsArticle
 
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    pass
+    inlines = [RelationshipInline]
 
 
 @admin.register(Tags)
 class TagsAdmin(admin.ModelAdmin):
-    # list_display = ['id', 'name']
     pass
 
 
 @admin.register(TagsArticle)
 class TagsArticleAdmin(admin.ModelAdmin):
-    # list_display = ['id', 'article', 'tags', 'is_main']
-    pass
-
-
+    list_display = ['id', 'article', 'tag', 'is_main']

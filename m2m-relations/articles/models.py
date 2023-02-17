@@ -16,7 +16,7 @@ class Article(models.Model):
 
 
 class Tags(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, verbose_name='Тег')
     
     class Meta:
         verbose_name = 'Тег'
@@ -27,13 +27,10 @@ class Tags(models.Model):
 
 
 class TagsArticle(models.Model):
-    tag = models.ForeignKey(Tags, on_delete=models.CASCADE)
-    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='scopes')
-    is_main = models.BooleanField(default=False)
+    tag = models.ForeignKey(Tags, on_delete=models.CASCADE, verbose_name='Тег')
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='scopes', verbose_name='Статья')
+    is_main = models.BooleanField(default=False, verbose_name='Основной')
 
     class Meta:
-        verbose_name = 'Связь m2m'
-        verbose_name_plural = 'Связи m2m'
-    
-    # def __str__(self):
-    #     return self.name
+        verbose_name = 'Связи m2m'
+        verbose_name_plural = 'Связь Тег - Статья'
