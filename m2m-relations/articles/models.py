@@ -10,6 +10,7 @@ class Article(models.Model):
     class Meta:
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
+        ordering = ['-published_at']
 
     def __str__(self):
         return self.title
@@ -34,3 +35,4 @@ class TagsArticle(models.Model):
     class Meta:
         verbose_name = 'Связи m2m'
         verbose_name_plural = 'Связь Тег - Статья'
+        ordering = ['-is_main', 'tag__name']
